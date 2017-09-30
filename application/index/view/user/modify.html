@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<title>修改信息-零之书</title>
+	<meta name="aplus-xplug" content="NONE">
+<link rel="stylesheet" href="__PUBLIC__/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="__PUBLIC__/static/css/fa.css">
+<link rel="stylesheet" href="__PUBLIC__/static/css/emoji.css">
+</head>
+<body>
+<header class="page-header">
+	<h1>零之书<small>人的眼睛之所以要长在前面，是为了要向前看</small></h1>
+</header>
+<nav class="navbar navbar-default" id="nav">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header" id="brand">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" id="brand">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">Zero</a>
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+	        <li><a href="{:url('info')}">我</a></li>
+	        <li><a href="{:url('history')}">浏览历史</a></li>
+	        <li ><a href="{:url('comment')}">我的评论</a></li>
+	        <li><a href="{:url('msg')}">我的消息</a></li>
+	        <li class="active"><a href="{:url('modify')}">修改信息</a></li>
+	        <li><a href="{:url('index/index')}">退出个人中心</a></li>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+<div class="container-fluid user table-responsive">
+<form method="post" action="{:url('modify')}" enctype="multipart/form-data">
+<table class="table half">
+      <tr>
+          <td>
+          	<ul class="list-group">
+				<li class="list-group-item"><img src="__PUBLIC__/uploads/{$info.head_portrait}" class="head_portrait img-responsive img-circle" style="cursor:pointer"></li>
+				<input type="file" name="head_portrait" class="hidden" onchange="change(this)">
+			</ul>
+		</td>
+        </tr>
+        <tr>
+          <td>
+          	<ul class="list-group">
+				<li class="list-group-item"><input type="text" name="user_name" value="{$info.user_name}" placeholder="用户名" class="form-control" pattern='\S{1,6}' required></li>
+				<li class="list-group-item"><input type="text" name="tel" value="{$info.tel}" placeholder="手机号" class="form-control" pattern="^1[34578]\d{9}$" required></li>
+				<li class="list-group-item"><input type="email" name="email" value="{$info.email}" placeholder="Email" class="form-control" required></li>
+				<li class="list-group-item"><input type="password" name="old_password" placeholder="原密码" class="form-control"></li>
+				<li class="list-group-item"><input type="password" name="password" placeholder="新密码" class="form-control"></li>
+				<li class="list-group-item"><input type="password" name="repassword" placeholder="确认密码" class="form-control"></li>
+			</ul>
+		</td>
+        </tr>  <tr>
+          <td>
+          <ul class="list-group center">
+				<li class="list-group-item"><input class="btn btn-default" type="submit" value="修改" style="width: 30%"></li>
+			</ul>
+		</td>
+        </tr>
+        <tr><td></td><td></td></tr>
+      </tbody>
+    </table>
+    </form>
+</div>
+<footer>Disign By Wyb</footer>
+</body>
+<script src="__PUBLIC__/static/js/jquery.min.js"></script>
+<script src="__PUBLIC__/static/js/bootstrap.min.js"></script>
+<script>
+$(window).scroll(function(){var bot=$("header").outerHeight();if($(window).scrollTop()>=bot){$("#adminav").addClass("navbar-fixed-top")}else{$("#adminav").removeClass("navbar-fixed-top")}});function change(file){var img=$(".head_portrait")[0];if(file.files&&file.files[0]){if(typeof FileReader=="undefined"){alert("你的浏览器不支持FileReader接口,不能修改头像!");return false}var reader=new FileReader();reader.onload=function(evt){img.src=evt.target.result};reader.readAsDataURL(file.files[0])}else{imgs=$('<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\''+file.value+"'\"></div>");img.innerHTML=imgs}}$(".head_portrait").click(function(){$('input[name="head_portrait"]').click()});
+</script>
+</html>

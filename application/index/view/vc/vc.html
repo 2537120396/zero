@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<title>王阳波的求职简历</title>
+<meta name="description" content="web开发相关工作求职简历" />
+<meta name="aplus-xplug" content="NONE">
+<meta name="keyword" content="王阳波,web开发求职,简历,前端工程师简历,php简历" />
+<link rel="stylesheet" href="__PUBLIC__/static/css/vc.css">
+</head>
+<body>
+<header>
+	<nav class="nav">
+		<span class="brand">wyb</span>
+		<ul id="lg">
+			<li id="nav1">关于我</li>
+			<li id="nav2">求职意向</li>
+			<li id="nav3">我的经历</li>
+			<li id="nav4">其他</li>
+		</ul>
+		<button class="glyphicon glyphicon-th-list" id="btn"></button>
+	</nav>
+</header>
+	<div class="box" name="box">
+		<div class="title">
+			<h1>简历
+				<p>我们总是在注意错过太多，却不注意自己拥有多少</p>
+			</h1>
+			<h3>王阳波</h3>
+			<h3>成都理工大学电子商务系</h3>
+		</div>
+	</div>
+	<div class="box" name="box">
+		<h2><span class="glyphicon glyphicon-triangle-right"></span>关于我</h2>
+		<div class="info">
+			<ul class="info-ul">
+				<li><span class="glyphicon glyphicon-user"></span>王阳波</li>
+				<li><span class="glyphicon glyphicon-phone"></span>17760475053</li>
+				<li><span class="glyphicon glyphicon-envelope"></span>1354062430@163.com</li>
+				<li><span><img id="qq" src="__PUBLIC__/static/images/qq.png">2369883712</span></li>
+			</ul>
+		</div>
+		<div class="info">
+			<ul class="info-ul">
+				<li id="info">
+					<canvas class="chart" id="php"></canvas>
+					<canvas class="chart" id="html-css"></canvas>
+					<canvas class="chart" id="js"></canvas>
+					<canvas class="chart" id="other"></canvas>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="box" name="box">
+		<h2><span class="glyphicon glyphicon-triangle-right"></span>求职意向</h2>
+		<table>
+			<tr>
+				<td align="center"><div class="img" id="img1">网站整体设计</div></td>
+				<td align="center"><div class="img" id="img2">php web开发</div></td>
+			</tr>
+			<tr>
+				<td align="center"><div class="img" id="img3">美工</div></td>
+				<td align="center"><div class="img" id="img4">前端页面编写</div></td>
+			</tr>
+		</table>
+	</div>
+	<div class="box" name="box">
+	<br>
+		<h2><span class="glyphicon glyphicon-triangle-right"></span>我的经历</h2>
+		<canvas id="experience"></canvas>
+		<div class="experience experience-left">
+			<b>2017.8-今</b>
+			<ul>
+				<li>系统学习web开发。</li>
+				<li>创建了个人博客。</li>
+				<li>掌握了php、html、css、js、linux系统等与web开发相关的知识与技能。</li>
+				<li>了解了web开发的基本流程及相关概念。</li>
+			</ul>
+		</div>
+		<a href="{:url('index/index')}" id="myblog">我的博客</a>
+		<div class="experience experience-right">
+			<b>2017.3</b>
+			<ul>
+				<li>第一次尝试动态网站搭建。</li>
+				<li>使用ASP技术搭建了一个商城类网站。</li>
+				<li>熟悉了动态网站搭建的一点方法。</li>
+			</ul>
+		</div>
+
+		<div class="experience experience-left">
+			<b>2016.10</b>
+			<ul>
+				<li>初识php。</li>
+				<li>使用php进行了最基础的微信接口开发。</li>
+				<li>了解了php的基础。</li>
+			</ul>
+		</div>
+	</div>
+	<div class="box" name="box" >
+	<br>
+		<h2><span class="glyphicon glyphicon-triangle-right" id="another-title"></span>其他</h2>
+		<div id="another">
+			<span class="glyphicon glyphicon-hand-right"></span><b> 个人简介</b>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;我是王阳波，坐标成都，就读于成都理工大学电子商务系。由于我专业的特性，关于web开发的相关基础知识相较于不是计算机相关专业的学生知道的更多，这使我自学编程的信心（毕竟大学里学的基本都是基础)。我认为web开发是一种需要设计才能与耐心的职业，同时这也是一种入门容易，但成为专家较难的职业。</p><br>
+			<span class="glyphicon glyphicon-hand-right"></span><b id="interest-title">我的兴趣</b><span style="font-size: 8px;"><-如有兴趣更多的了解我（这些基本与web开发无关），请点击</span>
+			<ul id="interest">
+			</ul>
+		</div>
+	</div>
+	<div class="box" name="box">
+	<div style="text-align: center">
+			<form action="{:url('vc')}" method="post">
+				<textarea name="comment" id="text" rows="10"></textarea>
+				<input type="submit" value="发表评论" class="submit">
+			</form>
+		</div>
+			<ul style="width:90%" id="comment">
+			{volist name="arr" id="v" empty="暂时没有数据"}
+				<li>{$v.user_name}:{$v.comment}&nbsp;<span class="grey">{$v.create_time|date="Y/m/d H:i",###}</span></li>
+			{/volist}
+			</ul>
+			{gt name="num" value="10"}
+				<div style="text-align: center"><input type="button" value="加载更多" class="submit" id="more"></div>
+			{else}
+				<input type="hidden" name="" id="more">
+			{/gt}
+	</div>
+	<div class="footer" name="box"></div>
+<footer>王阳波 tel：17760475053 email：1354062430@163.com</footer>
+</body>
+<script src="__PUBLIC__/static/js/vc.js"></script>
+</html>

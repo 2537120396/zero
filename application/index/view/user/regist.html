@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<title>注册-零之书</title>
+	<meta name="aplus-xplug" content="NONE">
+<link rel="stylesheet" href="__PUBLIC__/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="__PUBLIC__/static/css/fa.css">
+</head>
+<body>
+<header class="page-header">
+	<h1>零之书<small>这世界上也许有人喜欢孤独，但没有人可以承受孤独</small></h1>
+</header>
+<div class="container-fluid">
+	<ul class="list-group" style="margin: 20px auto;width: 50%">
+		<li class="list-group-item" style="text-align: center;"><b>用户注册</b><a href="{:url('login')}" class="btn btn-default right">登录</a></li>
+  		<li class="list-group-item">
+  			<form action="{:url('regist')}" method="post" class="form-horizontal">
+				<div class="form-group">
+					<div class="msg" id="user_name"></div>
+					<div class="col-sm-12">
+		  				<input type="text" name="user_name" placeholder="用户名" class="form-control" pattern='\S{1,6}' required> 
+		  			</div>
+		  		</div>
+		  		<div class="form-group">
+		  			<div class="msg" id="tel"></div>
+					<div class="col-sm-12">
+						<input type="text" name="tel" placeholder="手机号" class="form-control" pattern="^1[34578]\d{9}$" required>
+					</div>
+		  		</div>
+		  		<div class="form-group">
+		  			<div class="msg" id="email"></div>
+					<div class="col-sm-12">
+						<input type="email" name="email" placeholder="Email" class="form-control" required>
+					</div>
+		  		</div>
+				<div class="form-group">
+					<div class="msg" id="password"></div>
+					<div class="col-sm-12">
+						<input type="password" name="password" placeholder="密码" class="form-control" required>
+					</div>
+		  		</div>
+				<div class="form-group">
+					<div class="msg" id="repassword"></div>
+					<div class="col-sm-12">
+						<input type="password" name="repassword" placeholder="确认密码" class="form-control" required>
+					</div>
+		  		</div>
+				<div class="form-group">
+    				<div class="col-sm-12" style="text-align: center;">
+						<input type="submit" value="注册" class="btn btn-default" style="min-width: 50%;">
+					</div>
+		  		</div>
+			</form> 
+		</li>
+	</ul>	
+</div>
+<footer>Disign By Wyb</footer>
+</body>
+<script src="__PUBLIC__/static/js/jquery.min.js"></script>
+<script src="__PUBLIC__/static/js/bootstrap.min.js"></script>
+<script>
+function cw(){if($(document).width()<=760){$("ul").css("width","90%")}else{$("ul").css("width","50%")}}cw();$(window).resize(function(){cw()});var warn='<span class="glyphicon glyphicon-remove"></span>';var success='<span class="glyphicon glyphicon-ok"></span>';$(".form-control").focusout(function(){var name=this.name;if(this.value==""){$("#"+name).css("color","#e00");$("#"+name).html(warn+"此项不能为空！")}else{var value=this.value;if(name=="repassword"){var pass=$("input[name='password']")[0].value;var data={name:name,value:value,pass:pass}}else{var data={name:name,value:value}}$.ajax({type:"POST",url:"test",dataType:"json",data:data,success:function(msg){if(msg[0]===0){$("#"+name).css("color","#e00");$("#"+name).html(warn+msg[1])}else{$("#"+name).css("color","#3c763d");$("#"+name).html(success)}},error:function(jqXHR){alert(jqXHR.responseText)}})}})
+</script>
+</html>

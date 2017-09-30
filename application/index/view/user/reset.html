@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<title>重置密码-零之书</title></title>
+	<meta name="aplus-xplug" content="NONE">
+<link rel="stylesheet" href="__PUBLIC__/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="__PUBLIC__/static/css/fa.css">
+</head>
+<body>
+<header class="page-header">
+	<h1>零之书<small>为什么重要的东西总是在察觉到的时候就已经失去了</small></h1>
+</header>
+<div class="container-fluid">
+	<ul class="list-group" style="margin: 20px auto;width: 50%">
+		<li class="list-group-item" style="text-align: center;"><b>重置密码</b>
+		<li class="list-group-item">{$msg}</li>
+	</ul>
+</div>
+<footer>Disign By Wyb</footer>
+</body>
+<script src="__PUBLIC__/static/js/jquery.min.js"></script>
+<script src="__PUBLIC__/static/js/bootstrap.min.js"></script>
+<script>
+$("#verify_img").click(function(){var ts=Date.parse(new Date())/1000;$("#verify_img").attr("src","/captcha?id="+ts)});
+</script>
+</html>

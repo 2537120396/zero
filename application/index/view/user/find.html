@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<title>找回密码-零之书</title>
+	<meta name="aplus-xplug" content="NONE">
+<link rel="stylesheet" href="__PUBLIC__/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="__PUBLIC__/static/css/fa.css">
+</head>
+<body>
+<header class="page-header">
+	<h1>零之书<small>人永远不知道，谁哪次不经意的跟你说了再见之后，就真的不会再见了</small></h1>
+</header>
+<div class="container-fluid">
+	<ul class="list-group" style="margin: 20px auto;width: 50%">
+		<li class="list-group-item" style="text-align: center;"><b>输入您注册的电子邮箱，找回密码</b>
+		<li class="list-group-item">
+		<form action="" class="form-horizontal">
+			<div class="form-group">
+				<div class="col-sm-12"><input type="email" class="form-control" name="email" id="email" placeholder="email"></div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-12" style="text-align: center;"><input type="button" class="btn btn-default" id="sub_btn" value="提 交" style="min-width: 50%;"></div>
+			</div>
+		</form>
+		</li>
+	</ul>
+</div>
+<footer>Disign By Wyb</footer>
+</body>
+<script src="__PUBLIC__/static/js/jquery.min.js"></script>
+<script src="__PUBLIC__/static/js/bootstrap.min.js"></script>
+<script>
+$(function(){$("#sub_btn").click(function(){var email=$("#email").val();var preg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;if(email==""||!preg.test(email)){alert("请填写正确的邮箱！")}else{$("#sub_btn").attr("disabled","disabled").val("提交中..").css("cursor","default");$.ajax({type:"POST",url:"find",dataType:"json",data:{mail:email},success:function(msg){if(msg=="noreg"){alert("该邮箱尚未注册！");$("#sub_btn").removeAttr("disabled").val("提 交").css("cursor","pointer")}else{alert(msg)}},error:function(jqXHR){alert(jqXHR.responseText)}})}})});
+</script>
+</html>

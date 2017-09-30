@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<title>{$seo.title}-零之书</title>
+	<meta name="description" content="{$seo.info}" />
+	<meta name="aplus-xplug" content="NONE">
+	<meta name="keyword" content="{volist name='$seo.keywords' id='vo'}{$vo},{/volist}" />
+<link rel="stylesheet" href="__PUBLIC__/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="__PUBLIC__/static/css/fa.css">
+<link rel="stylesheet" href="__PUBLIC__/static/css/emoji.css">
+<script>
+var option = {
+    emojiArray:['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50']
+        }
+</script>
+</head>
+<body>
+	<header class="jumbotron" id="header">
+		<div class="container">
+			<h1>零之书</h1>
+			<p>当面对两难的抉择时，不妨丢一枚硬币吧，并非是要靠那二分之一的机运来帮你做出抉择！而是因为当硬币被抛上空中，开始旋转的那一瞬间你会突然明白，自己想要的！</p>
+		</div>
+	</header>
+	<nav class="navbar navbar-default" id="nav">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header" id="brand">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" id="brand">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">Zero</a>
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+	        <li id="in"><a href="{:url('index/index')}">成长之路</a></li>
+	        <li id="rin"><a href="{:url('index/rindex')}">日常杂谈</a></li>
+	        <li id=|qin><a href="{:url('index/qindex')}">其他</a></li>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-md-9 col-lg-9">
+			<article > 
+			{volist name="art" id="a" empty="该id下暂时没有文章"}
+				<div style="font-size: 30px">{$a.title}</div>
+				<div>
+					<div style="text-align: right;color:#aaa"><time class="glyphicon glyphicon-time">{$a.update_time|date="Y/m/d H:i",###}</time>&nbsp;&nbsp;<em class="glyphicon glyphicon-folder-open">&nbsp;{$a.cat_name}</em>&nbsp;&nbsp;<em class="glyphicon glyphicon-comment"></em>&nbsp;{$a.comnum}条评论&nbsp;&nbsp;<em class="glyphicon glyphicon-eye-open"></em>&nbsp;{$a.clicknum}人阅读</div>
+					<div>
+						{if condition="!empty($a.pic)"}<div><img src="__PUBLIC__/uploads/{$a.pic}" class="img-responsive image"></div>{/if}
+						<span id="con">{$content.content}</span>
+					</div>
+				</div>
+				{/volist}
+			</article>
+			{volist name="comments" id="c" empty="暂时没有回复！"}
+			<div class="panel panel-info" id="cment">
+				<div class="panel-heading">
+					<a href="{:url('user/info',['user_id'=>$c.user_id])}"><img src="__PUBLIC__/uploads/{$c.head_portrait}" alt="头像" class="img-circle head_portrait"></a>
+					{$c.user_name}&nbsp;&nbsp;
+					<time class="grey">{$c.create_time|date="Y-m-d",###}</time>{eq name="id" value="$c.user_id"}<a class="del" href="{:url('del',['com_id'=>$c.com_id])}">删除</a>{/eq}
+				</div>
+				<div class="panel-body" style="border-bottom: 1px solid #ddd"><p>{$c.comment}</p>
+					{if condition="!empty($pic[$c.com_id])"}
+						{volist name="pic[$c.com_id]" id="p"}
+							{volist name="p" id="i"}
+							<img src="__PUBLIC__/uploads/{$i.pic}" class="img-responsive" style="display: inline">
+							{/volist}
+						{/volist}
+					{/if}
+				</div>
+				<div class="panel-body" id="us{$c.com_id}">
+					<div class="reply">
+					<div class="box">
+						{volist name="replys[$c.com_id]" id="r" empty="暂时没有回复"}
+						{if condition="!empty($r)"}
+							{volist name="r" id="pl"}
+							<span id="rus{$pl.mid}" class="rus-name">{$pl.user_name}</span>&nbsp;&nbsp;<time class="grey">{eq name="id" value="$c.user_id"}<a class="del" href="{:url('del',['mid'=>$pl.mid])}">删除</a>{/eq}{$pl.update_time|date="Y-m-d",###}</time>
+							<p>{$pl.msg}</p>
+							{/volist}
+							<input type="hidden" name="uid" value="{$pl.uid}">
+						{/if}
+						{/volist}
+						</div>
+						<ul>
+							<span class="glyphicon glyphicon-triangle-right"></span><li id="rcom{$c.com_id}" class="edi">回复</li>
+						</ul>
+					</div>
+					<div class="rep"></div>	
+				</div>
+			</div>
+			{/volist}
+			<nav aria-label="Page navigation" id="page">
+				<ul class="pagination">
+					{$comments->render()}
+				</ul>
+			</nav>
+			<div id="Box">
+				<div id="comment">
+					<div contenteditable="true" id="content"></div>
+					<div id="copic"></div>
+					<div id="item">
+						<div id="load"></div>
+						<button id="upload" class="btn btn-defaul glyphicon glyphicon-picture"></button>
+						<form id="com" action="{:url('arts/comment')}" method="post" enctype="multipart/form-data">
+							<div id="fileDiv" class="hide">
+							<textarea name="content" cols="1" rows="1"></textarea></div>
+							<input type="button" value="submit" class="btn btn-default sub" id="sub">
+							<input type="submit" id="hsub" class="hide">
+						</form>
+					</div>
+				</div>
+				<div id="emojiBox" class="hide"></div>
+			</div>
+		</div>
+		<div class="col-sm-3 col-md-3 col-lg-3 hidden-xs" id="aside">
+			<aside class="panel panel-info">
+			{if condition="!empty($user)"}
+					<div class="panel-heading"><a href="{:url('user/info',['user_id'=>cookie('id')])}">{$user.user_name}</a></div>
+					<ul class="list-group">
+						<li class="list-group-item">上次登录：{$time}</li>
+						<li class="list-group-item"><a href="{:url('user/history')}">最近查看</a></li>
+						<li class="list-group-item"><a href="{:url('user/comment')}">我的评论</a></li>
+						<li class="list-group-item"><a href="{:url('user/msg')}">信息中心</a>{neq name="num" value="0"}<span class="badge">{$num}</span>{/neq}</li>
+						<li class="list-group-item"><a href="{:url('user/modify')}">修改信息</a></li>
+					</ul>
+			{else}<div class="center" id="rl"><a href="{:url('user/login')}" class="btn btn-default ma">登录</a><a href="{:url('user/regist')}" class="btn btn-default ma">注册</a></div>
+			{/if}
+			</aside>
+			<aside class="panel panel-info">
+				<div class="panel-heading">分类目录</div>
+				<ul class="list-group">
+				{volist name="cats" id="v" empty="暂时没有分类"}
+					<li class="list-group-item"><a href="{:url('index/'.$str,['cat_id'=>$v.cat_id])}" class="ind">{$v.cat_name}</a><span class="badge">{$v.num}</span></li>
+				{/volist}
+				</ul>
+			</aside>
+			<aside class="panel panel-info">
+				<div class="panel-heading">热门文章</div>
+				<ul class="list-group">
+				{volist name="harts" id="h" empty="暂时没有数据"}
+					<li class="list-group-item"><a href="{:url('art',['art_id'=>$h.art_id])}">{$h.title}</a><span class="badge">{$h.clicknum}</span></li>
+				{/volist}
+				</ul>
+			</aside>
+		</div>
+	</div>
+	<div id="am">
+		<button class="btn btn-default glyphicon glyphicon-menu-left visible-xs-block" style="border: 0;"></button>
+	</div>
+	<div id="menu" class="visible-xs-block"></div>
+</div>
+<footer>Dsign By Wyb</footer>
+</body>
+<script src="__PUBLIC__/static/js/jquery.min.js"></script>
+<script src="__PUBLIC__/static/js/bootstrap.min.js"></script>
+<script src="__PUBLIC__/static/js/emoji.js"></script>
+<script src="__PUBLIC__/static/js/reply.js"></script>
+<script>
+$('#am').click(function(e){$('#menu').css('display','block');$('#menu').append($('#aside').html());$('#am').css('display','none');$('#menu').css('width','150px');e.stopPropagation();});$("#menu").click(function(event){event.stopPropagation();});if($('#menu').css('display')=='block'){$(document).click(function(){$('#menu').css('display','none');$('#menu').css('width','0');$('#menu').children().remove();$('#am').css('display','block');});}$(window).scroll(function(){var bot=$('header').outerHeight();if($(window).scrollTop()>=bot){$('#nav').addClass('navbar-fixed-top');}else{$('#nav').removeClass('navbar-fixed-top');}});var emo = new Emoji(option);emo.init();var param = {$art.0.pid};if(param == 2){$('#in').removeClass('active');$('#qin').removeClass('active');$('#rin').addClass('active');}else if(param == 3){$('#in').removeClass('active');$('#rin').removeClass('active');$('#qin').addClass('active');}else{$('#rin').removeClass('active');$('#qin').removeClass('active');$('#in').addClass('active');}$('.del').click(function(){var msg = "确定要删除?";if (confirm(msg)==true){return true;}else{return false;}});$('#con img').addClass('img-responsive');$('#con img').addClass('image');
+</script>
+</html>

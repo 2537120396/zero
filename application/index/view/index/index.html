@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<title>零之书</title>
+	<meta name="description" content="web开发技术交流及我的日常感受" />
+	<meta name="aplus-xplug" content="NONE">
+	<meta name="keyword" content="web开发，php，前端" />
+<link rel="stylesheet" href="__PUBLIC__/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="__PUBLIC__/static/css/fa.css">
+</head>
+<body>
+	<header class="jumbotron" id="header">
+		<div class="container">
+			<h1>零之书</h1>
+			<p>温柔正确的人总是难以生存，因为这世界既不温柔，也不正确</p>
+		</div>
+	</header>
+	<nav class="navbar navbar-default" id="nav">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header" id="brand">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" id="brand">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">Zero</a>
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+	        <li id="in"><a href="{:url('index')}">成长之路</a></li>
+	        <li id="rin"><a href="{:url('rindex')}">日常闲谈</a></li>
+	        <li id="qin"><a href="{:url('qindex')}">其他</a></li>
+	      </ul>
+	      <form class="navbar-form navbar-right" method="get" action="{:url('search')}">
+	        <div class="form-group">
+	          <input type="text" name="search" class="form-control" placeholder="Search">
+	        </div>
+	        <button type="submit" class="btn btn-default glyphicon glyphicon-search"></button>
+	      </form>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+<div class="container-fluid" style="min-height:600px">
+	<div class="row">
+		<div class="col-sm-9 col-md-9 col-lg-9">
+			{volist name="arts" id="vo" empty="暂时没有数据"}
+			<article class="panel panel-info"> 
+				<div class="panel-heading"><a href="{:url('arts/art',['art_id'=>$vo.art_id])}">{$vo.title}</a>
+				</div>
+				<div class="panel-body" style="text-align: right;color:#aaa"><time class="glyphicon glyphicon-time">{$vo.update_time|date="Y/m/d H:i",###}</time>&nbsp;&nbsp;<em class="glyphicon glyphicon-folder-open">&nbsp;{$vo.cat_name}</em>&nbsp;&nbsp;<em class="glyphicon glyphicon-comment">&nbsp;{$vo.comnum}条评论</em></div>
+				<div class="panel-body">
+					{if condition="!empty($vo.thumb)"}<div><img src="__PUBLIC__/uploads/{$vo.thumb}" class="img-responsive"></div>{/if}
+					{$vo.info}
+				</div>
+			</article>
+			{/volist}
+			<nav aria-label="Page navigation" id="page">
+				<ul class="pagination">
+					{$arts->render()}
+				</ul>
+			</nav>
+		</div>
+		<div class="col-sm-3 col-md-3 col-lg-3 hidden-xs" id="aside">
+			<aside class="panel panel-info">
+			{if condition="!empty($user)"}
+					<div class="panel-heading"><a href="{:url('user/info',['user_id'=>cookie('id')])}">{$user.user_name}</a></div>
+					<ul class="list-group">
+						<li class="list-group-item">上次登录：{$time}</li>
+						<li class="list-group-item"><a href="{:url('user/history')}">最近查看</a></li>
+						<li class="list-group-item"><a href="{:url('user/comment')}">我的评论</a></li>
+						<li class="list-group-item"><a href="{:url('user/msg')}">信息中心</a>{neq name="num" value="0"}<span class="badge">{$num}</span>{/neq}</li>
+						<li class="list-group-item"><a href="{:url('user/modify')}">修改信息</a></li>
+					</ul>
+			{else}<div class="center" id="rl"><a href="{:url('user/login')}" class="btn btn-default ma">登录</a><a href="{:url('user/regist')}" class="btn btn-default ma">注册</a></div>
+			{/if}
+			</aside>
+			<aside class="panel panel-info">
+				<div class="panel-heading">分类目录</div>
+				<ul class="list-group">
+				{volist name="cats" id="v" empty="暂时没有分类"}
+					<li class="list-group-item"><a href="{:url('index',['cat_id'=>$v.cat_id])}" class="ind">{$v.cat_name}</a><span class="badge">{$v.num}</span></li>
+				{/volist}
+				</ul>
+			</aside>
+			<aside class="panel panel-info">
+				<div class="panel-heading">热门文章</div>
+				<ul class="list-group">
+				{volist name="harts" id="h" empty="暂时没有数据"}
+					<li class="list-group-item"><a href="{:url('arts/art',['art_id'=>$h.art_id])}">{$h.title}</a><span class="badge">{$h.clicknum}</span></li>
+				{/volist}
+				</ul>
+			</aside>
+		</div>
+	</div>
+	<div id="am">
+		<button class="btn btn-default glyphicon glyphicon-menu-left visible-xs-block" style="border: 0;"></button>
+	</div>
+	<div id="menu" class="visible-xs-block"></div>
+</div>
+<footer>Disign By Wyb</footer>
+</body>
+<script src="__PUBLIC__/static/js/jquery.min.js"></script>
+<script src="__PUBLIC__/static/js/bootstrap.min.js"></script>
+<script>
+$("#am").click(function(e){$("#menu").css("display","block");$("#menu").append($("#aside").html());$("#am").css("display","none");$("#menu").css("width","150px");e.stopPropagation()});$("#menu").click(function(event){event.stopPropagation()});if($("#menu").css("display")=="block"){$(document).click(function(){$("#menu").css("display","none");$("#menu").css("width","0");$("#menu").children().remove();$("#am").css("display","block")})}$(window).scroll(function(){var bot=$("header").outerHeight();if($(window).scrollTop()>=bot){$("#nav").addClass("navbar-fixed-top")}else{$("#nav").removeClass("navbar-fixed-top")}});var param=document.location.href;$rel=[/^\S*rindex\S*.html$/,/^\S*qindex\S*.html$/];if(null!==param.match($rel[0])){$("#in").removeClass("active");$("#qin").removeClass("active");$("#rin").addClass("active");$(".ind").attr("href",["{:url('rindex',['cat_id'=>$v.cat_id])}"])}if(null!==param.match($rel[1])){$("#in").removeClass("active");$("#rin").removeClass("active");$("#qin").addClass("active");$(".ind").attr("href",["{:url('qindex',['cat_id'=>$v.cat_id])}"])}if(null==param.match($rel[1])&&null==param.match($rel[0])){$("#rin").removeClass("active");$("#qin").removeClass("active");$("#in").addClass("active")};
+</script>
+</html>

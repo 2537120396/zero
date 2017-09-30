@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<title>我的评论-零之书</title>
+	<meta name="aplus-xplug" content="NONE">
+<link rel="stylesheet" href="__PUBLIC__/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="__PUBLIC__/static/css/fa.css">
+<link rel="stylesheet" href="__PUBLIC__/static/css/emoji.css">
+</head>
+<body>
+<header class="page-header">
+	<h1>零之书<small>不相信自己的人，连努力的价值都没有</small></h1>
+</header>
+<nav class="navbar navbar-default" id="nav">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header" id="brand">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false" id="brand">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">Zero</a>
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+	        <li><a href="{:url('info')}">我</a></li>
+	        <li><a href="{:url('history')}">浏览历史</a></li>
+	        <li class="active"><a href="{:url('comment')}">我的评论</a></li>
+	        <li><a href="{:url('msg')}">我的消息</a></li>
+	        <li><a href="{:url('modify')}">修改信息</a></li>
+	        <li><a href="{:url('index/index')}">退出个人中心</a></li>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+<div class="container-fluid user">
+			{volist name="comment" id="v" empty="暂时没有数据"}
+			<ul class="list-group">
+			  <li class="list-group-item"><a href="{:url('arts/art',['art_id'=>$v.art_id])}">{$v.title}</a>&nbsp;<time class="grey">{$v.create_time|date="Y/m/d H:i",###}</time></li>
+			  <li class="list-group-item">{$v.comment}</li>
+			</ul>
+			{/volist}
+	<nav aria-label="Page navigation" id="page">
+		<ul class="pagination">
+			{$comment->render()}
+		</ul>
+	</nav>
+</div>
+<footer>Disign By Wyb</footer>
+</body>
+<script src="__PUBLIC__/static/js/jquery.min.js"></script>
+<script src="__PUBLIC__/static/js/bootstrap.min.js"></script>
+<script>
+$(window).scroll(function(){var bot=$("header").outerHeight();if($(window).scrollTop()>=bot){$("#adminav").addClass("navbar-fixed-top")}else{$("#adminav").removeClass("navbar-fixed-top")}});
+</script>
+</html>
