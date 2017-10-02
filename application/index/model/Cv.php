@@ -3,7 +3,7 @@ namespace app\index\model;
 use think\Db;
 use think\Model;
 
-class Vc extends Model
+class Cv extends Model
 {
 	public function add($data){	
 		$result = $this->allowField(true)->save($data);
@@ -12,11 +12,11 @@ class Vc extends Model
 		}
 	}
 
-	public function vcComment($num=10){
-		return Db::view('vc','comment,create_time')->view('user','user_name','vc.user_id=user.user_id')->limit($num)->select();
+	public function cvComment($num=10){
+		return Db::view('cv','comment,create_time')->view('user','user_name','cv.user_id=user.user_id')->limit($num)->select();
 	}
 
 	public function num(){
-		return Db::field('count(*)')->table('vc')->find();
+		return Db::field('count(*)')->table('cv')->find();
 	}
 }

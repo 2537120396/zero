@@ -1,0 +1,1 @@
+$(".delete").click(function(){var msg="确定要删除?";if(confirm(msg)==true){return true}else{return false}});

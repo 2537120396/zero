@@ -1,9 +1,9 @@
 <?php
 namespace app\index\controller;
 
-class Vc
+class Cv
 {
-	public function vc(){
+	public function cv(){
    	if(!empty(input('post.comment'))){
    		if(!$this->validation()){
    			return redirect('user/login');
@@ -13,18 +13,18 @@ class Vc
   		} else {
   	   	$data['comment'] = input('post.comment');
   		  $data['user_id'] = cookie('id');
-  		  model('Vc')->add($data);
-        return redirect('vc');
+  		  model('Cv')->add($data);
+        return redirect('cv');
   		}
    	}
-   	$arr = model('Vc')->vcComment();
-   	$num = model('Vc')->num()['count(*)'];
-		return view('vc',['arr'=>$arr,'num'=>$num]);
+   	$arr = model('Cv')->cvComment();
+   	$num = model('Cv')->num()['count(*)'];
+		return view('cv',['arr'=>$arr,'num'=>$num]);
 	}
 
 	public function append(){
-    $arr = model('Vc')->vcComment(input('post.num')*10);
-    $num = model('Vc')->num()['count(*)'];
+    $arr = model('Cv')->cvComment(input('post.num')*10);
+    $num = model('Cv')->num()['count(*)'];
     if($num <= count($arr)){
       $arr[count($arr)] = 'n';
     }
