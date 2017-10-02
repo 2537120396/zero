@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 2017-09-30 04:02:47
+-- Generation Time: 2017-10-02 02:46:19
 -- 服务器版本： 5.7.12-log
 -- PHP Version: 7.0.6
 
@@ -132,6 +132,19 @@ CREATE TABLE `contents` (
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `cv`
+--
+
+CREATE TABLE `cv` (
+  `cid` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `comment` varchar(100) NOT NULL DEFAULT '',
+  `create_time` int(10) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `history`
 --
 
@@ -203,19 +216,6 @@ CREATE TABLE `user` (
   `salt` char(8) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- 表的结构 `vc`
---
-
-CREATE TABLE `vc` (
-  `vid` int(10) UNSIGNED NOT NULL,
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `comment` varchar(100) NOT NULL DEFAULT '',
-  `create_time` int(10) UNSIGNED NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Indexes for dumped tables
 --
@@ -258,6 +258,12 @@ ALTER TABLE `contents`
   ADD KEY `con` (`art_id`);
 
 --
+-- Indexes for table `cv`
+--
+ALTER TABLE `cv`
+  ADD PRIMARY KEY (`cid`);
+
+--
 -- Indexes for table `history`
 --
 ALTER TABLE `history`
@@ -291,12 +297,6 @@ ALTER TABLE `record`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
-
---
--- Indexes for table `vc`
---
-ALTER TABLE `vc`
-  ADD PRIMARY KEY (`vid`);
 
 --
 -- 在导出的表使用AUTO_INCREMENT
@@ -339,6 +339,12 @@ ALTER TABLE `contents`
   MODIFY `con_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键，自增';
 
 --
+-- 使用表AUTO_INCREMENT `cv`
+--
+ALTER TABLE `cv`
+  MODIFY `cid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- 使用表AUTO_INCREMENT `history`
 --
 ALTER TABLE `history`
@@ -367,12 +373,6 @@ ALTER TABLE `record`
 --
 ALTER TABLE `user`
   MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- 使用表AUTO_INCREMENT `vc`
---
-ALTER TABLE `vc`
-  MODIFY `vid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
