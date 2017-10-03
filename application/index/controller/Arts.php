@@ -87,9 +87,7 @@ class Arts
    			  $data['comment'] = input('post.content');
         }
    		}
-      $urlcan = $_SERVER['HTTP_REFERER'];
-      $urlcan = substr($urlcan,39);
-      $urlcan = intval($urlcan);
+      $urlcan = pathinfo($_SERVER['HTTP_REFERER'])['filename'];
   		$data['art_id'] = $urlcan;
   		$data['user_id'] = cookie('id');
   		$id = model('Comment')->add($data);
@@ -143,9 +141,7 @@ class Arts
      			$data['msg'] = input('post.content');
      			$data['com_id'] = input('post.com_id');
           $data['user_id'] = model('Comment')->uid($data['com_id'])['user_id'];
-     			$urlcan = $_SERVER['HTTP_REFERER'];
-          $urlcan = substr($urlcan,39);
-          $urlcan = intval($urlcan);
+          $urlcan = pathinfo($_SERVER['HTTP_REFERER'])['filename'];
           $data['art_id'] = $urlcan;
      			$data['uid'] = cookie('id');
      			model('Msg')->add($data);
@@ -165,9 +161,7 @@ class Arts
       if(count(input('post.content'))>100){
         alert('评论不能超过100个字符！');
       } else {
-   			$urlcan = $_SERVER['HTTP_REFERER'];
-        $urlcan = substr($urlcan,39);
-        $urlcan = intval($urlcan);
+        $urlcan = pathinfo($_SERVER['HTTP_REFERER'])['filename'];
         $data['art_id'] = $urlcan;
    			$data['com_id'] = input('post.uid2');
         $data['user_id'] = model('Msg')->uid(input('post.mid'))['uid'];
@@ -194,11 +188,7 @@ class Arts
       $id = input('param.mid');
       model('Msg')->where('mid',$id)->delete(); 
     }
-    $urlcan = $_SERVER['HTTP_REFERER'];
-    $urlcan = substr($urlcan,39);
-    $patterns = "/\d+/"; 
-    preg_match_all($patterns,$urlcan,$arr);
-    $urlcan = $arr[0][0];
+    $urlcan = pathinfo($_SERVER['HTTP_REFERER'])['filename'];
     return redirect('art',['art_id'=>$urlcan]);
   }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 2017-10-02 02:46:19
+-- Generation Time: 2017-10-03 14:51:25
 -- 服务器版本： 5.7.12-log
 -- PHP Version: 7.0.6
 
@@ -81,10 +81,10 @@ INSERT INTO `cats` (`cat_id`, `cat_name`, `num`, `pid`) VALUES
 (1, '成长之路', 0, 0),
 (2, '日常杂谈', 0, 0),
 (3, '其他', 0, 0),
-(4, 'php', 2, 1),
-(5, 'html,css', 1, 1),
+(4, 'php', 0, 1),
+(5, 'html,css', 0, 1),
 (6, 'js', 0, 1),
-(7, 'linux', 2, 1),
+(7, 'linux', 0, 1),
 (8, '我的兴趣', 0, 2),
 (9, '杂谈', 0, 2),
 (10, '转载', 0, 3),
@@ -196,6 +196,14 @@ CREATE TABLE `record` (
   `art_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
   `update_time` int(10) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `record`
+--
+
+INSERT INTO `record` (`rid`, `user_id`, `art_id`, `update_time`) VALUES
+(1, 0, 1, 1507041886),
+(2, 0, 1, 1507041957);
 
 -- --------------------------------------------------------
 
@@ -366,7 +374,7 @@ ALTER TABLE `msg`
 -- 使用表AUTO_INCREMENT `record`
 --
 ALTER TABLE `record`
-  MODIFY `rid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `rid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用表AUTO_INCREMENT `user`

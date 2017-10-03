@@ -203,7 +203,7 @@ class User extends controller
           $getpasstime = time(); 
           $uid = $row['user_id']; 
           $token = md5($uid.$row['user_name'].$row['password']);//组合验证码 
-          $url = 'http://www.wybweb.com'.url('reset',['email'=>$email,'token'=>$token]);//构造URL 
+          $url = 'http://'.$_SERVER['SERVER_NAME'].url('reset',['email'=>$email,'token'=>$token]);//构造URL 
           $time = date('Y-m-d H:i'); 
           $result = $this-> sendmail($time,$email,$url); 
           if($result==1){//邮件发送成功 
